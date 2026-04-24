@@ -11,6 +11,7 @@ permissions:
 jobs:
   build-card:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,27 +21,43 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install SVG converter
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+
       - name: Generate SVG card
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_USERNAME: YOUR_GITHUB_USERNAME
+          GITHUB_USERNAME: Lerox404
           DISPLAY_NAME: Leon
-          START_DATE: 2024-08-01
+          START_DATE: 2026-04-24
           IDE: VS Code, Linux Terminal
           PROGRAMMING_LANGS: JavaScript, TypeScript, Python, SQL
-          COMPUTER_LANGS: HTML, CSS, React, Vue, Git
-          REAL_LANGS: German, English
-          HOBBIES_SOFTWARE: Web Projects, Frontend, Databases
-          HOBBIES_HARDWARE: Linux, PCs, Troubleshooting
-          HOBBIES_OTHERS: RPGs, Soulslikes, FFXIV, LoL, Shooter
-          CONTACT_DISCORD: dein_discord
-          CONTACT_EMAIL: deine@mail.de
+          COMPUTER_LANGS: HTML, CSS, Git
+          REAL_LANGS: German, English C1
+          HOBBIES_SOFTWARE: Web Projects, Programming Projects
+          HOBBIES_HARDWARE: Embedded Systems
+          HOBBIES_OTHERS: grinding code and games
+          CONTACT_DISCORD: .lerox.
+          CONTACT_EMAIL: lerox.github@gmail.com
         run: python scripts/generate_profile_card.py
 
-      - name: Commit updated SVG
+      - name: Convert SVG to versioned PNG
+        run: |
+          rsvg-convert --width=1200 --height=860 assets/profile-card.svg > assets/profile-card-${GITHUB_RUN_NUMBER}.png
+
+      - name: Update README image
+        run: |
+          sed -i -E 's|<img src="[^"]+" alt="Leon profile card" width="100%" ?/?>|<img src="https://raw.githubusercontent.com/Lerox404/Lerox404/main/assets/profile-card-'"${GITHUB_RUN_NUMBER}"'.png" alt="Leon profile card" width="100%" />|g' README.md
+
+      - name: Remove old PNG files
+        run: |
+          find assets -maxdepth 1 -type f -name 'profile-card-*.png' ! -name "profile-card-${GITHUB_RUN_NUMBER}.png" -delete
+
+      - name: Commit updated card
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/profile-card.svg assets/profile-data.json
+          git add README.md assets/profile-card.svg assets/profile-card-${GITHUB_RUN_NUMBER}.png assets/profile-data.json
+          git add -u assets
           git diff --staged --quiet || git commit -m "chore: update profile card"
           git push
