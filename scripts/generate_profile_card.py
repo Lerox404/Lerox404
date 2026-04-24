@@ -6,7 +6,7 @@ import urllib.request
 import urllib.parse
 
 API = 'https://api.github.com'
-USER = os.getenv('GITHUB_USERNAME', 'YOUR_GITHUB_USERNAME')
+USER = os.getenv('GITHUB_USERNAME', 'Lerox404')
 TOKEN = os.getenv('GITHUB_TOKEN', '')
 DISPLAY = os.getenv('DISPLAY_NAME', 'Leon')
 START_DATE = os.getenv('START_DATE', '2024-08-01')
