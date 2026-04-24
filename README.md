@@ -1,3 +1,3 @@
 # Lerox404
 
-<img src="./assets/profile-card.png?raw=1&v=${{ github.sha }}" alt="Leon profile card" width="100%" />
+<img src="https://raw.githubusercontent.com/Lerox404/Lerox404/main/assets/profile-card-27.png" alt="Leon profile card" width="100%" />
