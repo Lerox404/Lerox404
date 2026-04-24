@@ -1,0 +1,46 @@
+name: Update Profile Card
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-card:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate SVG card
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: YOUR_GITHUB_USERNAME
+          DISPLAY_NAME: Leon
+          START_DATE: 2024-08-01
+          IDE: VS Code, Linux Terminal
+          PROGRAMMING_LANGS: JavaScript, TypeScript, Python, SQL
+          COMPUTER_LANGS: HTML, CSS, React, Vue, Git
+          REAL_LANGS: German, English
+          HOBBIES_SOFTWARE: Web Projects, Frontend, Databases
+          HOBBIES_HARDWARE: Linux, PCs, Troubleshooting
+          HOBBIES_OTHERS: RPGs, Soulslikes, FFXIV, LoL, Shooter
+          CONTACT_DISCORD: dein_discord
+          CONTACT_EMAIL: deine@mail.de
+        run: python scripts/generate_profile_card.py
+
+      - name: Commit updated SVG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/profile-card.svg assets/profile-data.json
+          git diff --staged --quiet || git commit -m "chore: update profile card"
+          git push
