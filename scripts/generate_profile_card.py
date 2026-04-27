@@ -183,7 +183,7 @@ base_rows = [
     ('', ''),
     ('Languages.Programming', os.getenv('PROGRAMMING_LANGS', 'JavaScript, TypeScript, Python, SQL')),
     ('Languages.Computer', os.getenv('COMPUTER_LANGS', 'HTML, CSS, Git')),
-    ('Languages.Real', os.getenv('REAL_LANGS', 'German, English C1')),
+    ('Languages.Real', os.getenv('REAL_LANGS', 'German, English')),
     ('', ''),
     ('Hobbies.Software', os.getenv('HOBBIES_SOFTWARE', 'Web Projects, Programming Projects')),
     ('Hobbies.Hardware', os.getenv('HOBBIES_HARDWARE', 'Embedded Systems')),
