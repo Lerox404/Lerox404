@@ -33,7 +33,7 @@ jobs:
           IDE: VS Code, Linux Terminal
           PROGRAMMING_LANGS: JavaScript, TypeScript, Python, SQL
           COMPUTER_LANGS: HTML, CSS, Git
-          REAL_LANGS: German, English C1
+          REAL_LANGS: German, English
           HOBBIES_SOFTWARE: Web Projects, Programming Projects
           HOBBIES_HARDWARE: Embedded Systems
           HOBBIES_OTHERS: grinding code and games
