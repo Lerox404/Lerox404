@@ -1,3 +1,3 @@
 # Lerox404
 
-<img src="https://raw.githubusercontent.com/Lerox404/Lerox404/main/assets/profile-card-76.png" alt="Leon profile card" width="100%" />
+<img src="https://raw.githubusercontent.com/Lerox404/Lerox404/main/assets/profile-card-77.png" alt="Leon profile card" width="100%" />
